@@ -50,7 +50,6 @@ public class Practica {
                     case 2:
                         System.out.println("Has seleccionado la opcion 2");
                         estadoActual();
-                        System.out.println("Espacio de memoria " + memoria.getLocalidades());
                         break;
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
@@ -122,20 +121,30 @@ public class Practica {
     private static void estadoActual(){
         System.out.println("El número de procesos en la cola es " + 
                 memoria.colaProcesos.size());
-        System.out.println("Los procesos finalizados exitosamente son ");
-        System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
-        for (int i = 0; i < memoria.finalizados.size(); i++) {
-            System.out.println(memoria.finalizados.get(i).id + "\t"
-                               + memoria.finalizados.get(i).nombre + "\t\t"
-                               + memoria.finalizados.get(i).instrucciones);
+        if(memoria.finalizados.size() > 0){
+            System.out.println("Los procesos finalizados exitosamente son ");
+            System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
+            for (int i = 0; i < memoria.finalizados.size(); i++) {
+                System.out.println(memoria.finalizados.get(i).id + "\t"
+                                   + memoria.finalizados.get(i).nombre + "\t\t"
+                                   + memoria.finalizados.get(i).instrucciones);
+            }    
+        }else{
+            System.out.println("No hay procesos finalizados");
         }
-        System.out.println("Los procesos eliminados son ");
-        System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
-        for (int i = 0; i < memoria.eliminados.size(); i++) {
-            System.out.println(memoria.eliminados.get(i).id + "\t"
-                               + memoria.eliminados.get(i).nombre + "\t\t"
-                               + memoria.eliminados.get(i).instrucciones);
+
+        if(memoria.eliminados.size() > 0){
+            System.out.println("Los procesos eliminados son ");
+            System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
+            for (int i = 0; i < memoria.eliminados.size(); i++) {
+                System.out.println(memoria.eliminados.get(i).id + "\t"
+                                   + memoria.eliminados.get(i).nombre + "\t\t"
+                                   + memoria.eliminados.get(i).instrucciones);
+            }
+        }else{
+            System.out.println("No hay procesos eliminados2");
         }
+
         // falta poner el estado de la memoria
         // localidades ocupadas por procesos
     }  
