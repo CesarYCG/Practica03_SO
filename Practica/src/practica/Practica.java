@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author fernando
+ * @author fernando & cesar
  */
 public class Practica {  
     static Memoria memoria = Memoria.getInstance();
@@ -40,55 +40,49 @@ public class Practica {
  
             try {
  
-                System.out.println("Escribe una de las opciones");
+                System.out.println("Ingresa el numero de la opcion requerida"
+                        + "y pulsa enter");
                 opcion = sn.nextInt();
- 
                 switch (opcion) {
-                    case 1:
+                    case 1: // Crear Proceso
                         crearProceso();
                         break;
-                    case 2:
-                        System.out.println("Has seleccionado la opcion 2");
+                    case 2: // Estado actual del sistema
                         estadoActual();
                         System.out.println("Espacio de memoria " + memoria.getLocalidades());
                         break;
-                    case 3:
-                        System.out.println("Has seleccionado la opcion 3");
+                    case 3: // Imprimir cola de procesos
                         mostrarProcesos();
                         break;
-                    case 4:
-                        System.out.println("Has seleccionado la opcion 4");
+                    case 4: // Ver proceso actual
                         procesoActual();
                         break;
-                    case 5:
-                        System.out.println("Has seleccionado la opcion 5");
+                    case 5: // Ejecutar proceso actual
                         ejecutarProceso();
                         break;
-                    case 6:
-                        System.out.println("Has seleccionado la opcion 6");
+                    case 6: // Pasar al proceso siguiente
                         siguienteProceso();
                         break;
-                    case 7:
-                        System.out.println("Has seleccionado la opcion 7");
-                        matarPorceso();
+                    case 7: // Matar proceso actual
+                        matarProceso();
                         break;
-                    case 8:
+                    case 8: // Salir del programa
                         salir = true;
                         mostrarProcesos();
                         System.out.println("Fin del Programa...");
                         sn.close();
                         break;
                     default:
-                        System.out.println("Solo números entre 1 y 4");
+                        System.out.println("Solo números entre 1 y 8");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Debes insertar un número");
                 sn.next();
             }
-            teclaParaContinuar(); // Para no desplegar el menu inmediatamente
+            //teclaParaContinuar(); // Para no desplegar el menu inmediatamente
         }
     }
-    
+    // DECLARACION Y ESTRUCTURACION DE FUNCIONES
     private static void teclaParaContinuar(){ //func para dar intervalo entre menus
         System.out.println("Presiona ENTER para continuar...");
         try{
@@ -109,7 +103,7 @@ public class Practica {
             System.out.println("Escribe el nombre del proceso");
             nombre = sn.nextLine();
             proceso.crearProceso(nombre, id,espacio);
-            System.out.println("El esapcio es " + proceso.espacio);
+            System.out.println("Espacio Ocupado: " + proceso.espacio);
             id += 1;
             memoria.colaProcesos.add(proceso);
         }else{
@@ -136,9 +130,53 @@ public class Practica {
                                + memoria.eliminados.get(i).nombre + "\t\t"
                                + memoria.eliminados.get(i).instrucciones);
         }
-        // falta poner el estado de la memoria
-        // localidades ocupadas por procesos
-    }  
+        
+        if (memoria.colaProcesos.isEmpty()){    // LISTA PROCESOS
+            System.out.println("LISTA DE PROCESOS EN COLA VACIA. ");
+        }else{
+            System.out.println("El número de procesos en la cola es "
+                    + memoria.colaProcesos.size());
+        }  
+        
+        if(memoria.finalizados.isEmpty()){      // LISTA FINALIZADOS
+            System.out.println("LISTA DE PROCESOS FINALIZADOS VACIA. ");
+        }else{
+            System.out.println("Los procesos finalizados exitosamente son: "); 
+            System.out.println("PID     NOMBRE   ");
+            for (int i = 0; i < memoria.finalizados.size(); i++) {
+                System.out.println(memoria.finalizados.get(i).id + "\t"
+                        + memoria.finalizados.get(i).nombre);
+            } 
+        }
+        
+        if (memoria.eliminados.isEmpty()){      // LISTA ELIMINADOS
+            System.out.println("LISTA DE PROCESOS ELIMINADOS VACIA. ");
+        }else{
+            System.out.println("Los procesos eliminados son: "); // Lista eliminados
+            System.out.println("PID     NOMBRE   ");
+            for (int i = 0; i < memoria.eliminados.size(); i++) {
+                System.out.println(memoria.eliminados.get(i).id + "\t"
+                        + memoria.eliminados.get(i).nombre);
+            }
+        }
+
+        if (memoria.colaProcesos.isEmpty()) {    // LISTA PROCESOS
+            System.out.println("LISTA DE PROCESOS ACTIVOS VACIA");
+        } else {
+            int aux;
+            int sum = 0;
+            System.out.println("LOCALIDAD \t PROCESO");
+            for (int i = 0; i < memoria.colaProcesos.size(); i++){
+                aux = memoria.colaProcesos.get(i).espacio;
+                
+                System.out.println("[" + (sum+1) + "-" + 
+                        (sum + memoria.colaProcesos.get(i).espacio)+ "]\t" +
+                        memoria.colaProcesos.get(i).nombre);
+                                      
+                sum += aux;
+            }
+        }
+    }
     
     private static void mostrarProcesos(){
         System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
@@ -180,11 +218,10 @@ public class Practica {
         memoria.colaProcesos.removeFirst();
     }
     
-    private static void matarPorceso(){
+    private static void matarProceso(){
         memoria.setLocalidades(memoria.getLocalidades() + memoria.colaProcesos.getFirst().espacio);
         memoria.eliminados.add(memoria.colaProcesos.getFirst());
         System.out.println("La instrucciones pendientes son " + memoria.colaProcesos.getFirst().instrucciones);
         memoria.colaProcesos.remove();
     }
-
 }

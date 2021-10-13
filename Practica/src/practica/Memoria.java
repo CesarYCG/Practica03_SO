@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 /**
  *
- * @author fernando
+ * @author fernando & cesar
  */
 public class Memoria {
     

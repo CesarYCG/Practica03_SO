@@ -6,7 +6,7 @@ package practica;
 
 /**
  *
- * @author fernando
+ * @author fernando & cesar
  */
 public class Proceso {
     String nombre;
