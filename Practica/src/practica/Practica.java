@@ -5,6 +5,7 @@
 package practica;
 
 import java.util.InputMismatchException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -79,7 +80,7 @@ public class Practica {
                 System.out.println("Debes insertar un número");
                 sn.next();
             }
-            //teclaParaContinuar(); // Para no desplegar el menu inmediatamente
+            teclaParaContinuar(); // Para no desplegar el menu inmediatamente
         }
     }
     // DECLARACION Y ESTRUCTURACION DE FUNCIONES
@@ -89,7 +90,7 @@ public class Practica {
             System.in.read();
             
         }
-        catch(Exception e){}
+        catch(IOException e){System.out.println("Algo fue mal en la linea 83...");}
     }
     
     private static void crearProceso(){
@@ -169,7 +170,7 @@ public class Practica {
             }
         }
 
-        if (memoria.colaProcesos.isEmpty()) {    // LISTA PROCESOS
+        if (memoria.colaProcesos.isEmpty()) {    // LISTA LOCALIDADES
             System.out.println("LISTA DE PROCESOS ACTIVOS VACIA");
         } else {
             int aux;
