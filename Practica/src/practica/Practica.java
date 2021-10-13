@@ -200,34 +200,44 @@ public class Practica {
             System.out.println("Instrucciones ejecutadas " + memoria.colaProcesos.getFirst().instruccionesEjecutadas);
             System.out.println("Direcciones de memoria " + memoria.colaProcesos.getFirst().espacio);
         }
-
     }
     
     private static void ejecutarProceso(){
-        System.out.println("Proceso: " + memoria.colaProcesos.getFirst().nombre);
-        memoria.colaProcesos.getFirst().instrucciones = memoria.colaProcesos.getFirst().instrucciones - 5;
-        memoria.colaProcesos.getFirst().instruccionesEjecutadas += 5;
-        if (memoria.colaProcesos.getFirst().instrucciones <= 0){            // Si ya no tiene instrucciones
-            memoria.finalizados.addFirst(memoria.colaProcesos.getFirst());  // Agrega el elemento a lista finalizados
-            System.out.println("PROCESO: " + memoria.colaProcesos.getFirst().nombre + " FINALIZADO");
-            System.out.println("LIBERADAS: " + memoria.colaProcesos.getFirst().espacio + " LOCALIDADES");
-            memoria.colaProcesos.remove();                                  // Quita el primer elemento   
+        if(memoria.colaProcesos.isEmpty()){
+            System.out.println("COLA DE PROCESOS VACIA, REQUIERE AL MENOS UN (1) PROCESO CREADO.");
         }else{
-            memoria.colaProcesos.add(memoria.colaProcesos.getFirst());      // Copia el 1st al final de la LinkedList
-            memoria.colaProcesos.removeFirst();                             // Saca el primer elemento de la LinkedList
+            System.out.println("Proceso: " + memoria.colaProcesos.getFirst().nombre);
+            memoria.colaProcesos.getFirst().instrucciones = memoria.colaProcesos.getFirst().instrucciones - 5;
+            memoria.colaProcesos.getFirst().instruccionesEjecutadas += 5;
+            if (memoria.colaProcesos.getFirst().instrucciones <= 0) {            // Si ya no tiene instrucciones
+                memoria.finalizados.addFirst(memoria.colaProcesos.getFirst());  // Agrega el elemento a lista finalizados
+                System.out.println("PROCESO: " + memoria.colaProcesos.getFirst().nombre + " FINALIZADO");
+                System.out.println("LIBERADAS: " + memoria.colaProcesos.getFirst().espacio + " LOCALIDADES");
+                memoria.colaProcesos.remove();                                  // Quita el primer elemento   
+            } else {
+                memoria.colaProcesos.add(memoria.colaProcesos.getFirst());      // Copia el 1st al final de la LinkedList
+                memoria.colaProcesos.removeFirst();                             // Saca el primer elemento de la LinkedList
+            }
         }
-    
     }
     
     private static void siguienteProceso(){
-        memoria.colaProcesos.add(memoria.colaProcesos.getFirst());
-        memoria.colaProcesos.removeFirst();
+        if(memoria.colaProcesos.isEmpty()){
+            System.out.println("COLA DE PROCESOS VACIA, REQUIERE AL MENOS UN (1) PROCESO CREADO.");
+        }else{
+            memoria.colaProcesos.add(memoria.colaProcesos.getFirst());
+            memoria.colaProcesos.removeFirst();
+        }
     }
     
     private static void matarProceso(){
-        memoria.setLocalidades(memoria.getLocalidades() + memoria.colaProcesos.getFirst().espacio);
-        memoria.eliminados.add(memoria.colaProcesos.getFirst());
-        System.out.println("La instrucciones pendientes son " + memoria.colaProcesos.getFirst().instrucciones);
-        memoria.colaProcesos.remove();
+        if(memoria.colaProcesos.isEmpty()){
+            System.out.println("COLA DE PROCESOS VACIA, REQUIERE AL MENOS UN (1) PROCESO CREADO.");
+        }else{
+            memoria.setLocalidades(memoria.getLocalidades() + memoria.colaProcesos.getFirst().espacio);
+            memoria.eliminados.add(memoria.colaProcesos.getFirst());
+            System.out.println("La instrucciones pendientes son " + memoria.colaProcesos.getFirst().instrucciones);
+            memoria.colaProcesos.remove();
+        }
     }
 }
