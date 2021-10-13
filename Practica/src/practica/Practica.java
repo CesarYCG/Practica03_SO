@@ -63,6 +63,7 @@ public class Practica {
                         break;
                     case 6:
                         System.out.println("Has seleccionado la opcion 6");
+                        siguienteProceso();
                         break;
                     case 7:
                         System.out.println("Has seleccionado la opcion 7");
@@ -123,6 +124,11 @@ public class Practica {
     
     private static void ejecutarProceso(){
     
+    }
+    
+    private static void siguienteProceso(){
+        memoria.colaProcesos.add(memoria.colaProcesos.getFirst());
+        memoria.colaProcesos.removeFirst();
     }
     
 }
