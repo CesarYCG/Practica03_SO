@@ -11,8 +11,10 @@ import java.util.Scanner;
  *
  * @author fernando
  */
-public class Practica {
-    static Proceso proceso = new Proceso();
+public class Practica {  
+    static Memoria memoria = Memoria.getInstance();
+    static int id = 0;
+    
     /**
      * @param args the command line arguments
      */
@@ -46,10 +48,15 @@ public class Practica {
                         break;
                     case 2:
                         System.out.println("Has seleccionado la opcion 2");
+                        
                         break;
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
-                        proceso.mostrarProcesos();
+                        for(int i = 0; i < memoria.colaProcesos.size(); i++){
+                            System.out.println("ID " + memoria.colaProcesos.get(i).id);
+                            System.out.println("Nombre " + memoria.colaProcesos.get(i).nombre);
+                            System.out.println("Intrucciones " + memoria.colaProcesos.get(i).instrucciones);
+                        }
                         break;
                     case 4:
                         System.out.println("Has seleccionado la opcion 4");
@@ -78,13 +85,15 @@ public class Practica {
     }
     
     private static void crearProceso(){
+        Proceso proceso = new Proceso();
         Scanner sn = new Scanner(System.in);
         String nombre; // Guardamos nombre del proceso
-        
+        id += 1;
         System.out.println("Has seleccionado la opcion 1");
         System.out.println("Escribe el nombre del proceso");
         nombre = sn.nextLine();
-        proceso.crearProceso(nombre);
+        proceso.crearProceso(nombre, id);
+        memoria.colaProcesos.add(proceso);
     }
     
 }

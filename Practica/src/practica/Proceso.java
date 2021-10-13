@@ -9,21 +9,19 @@ package practica;
  * @author fernando
  */
 public class Proceso {
-    private String nombre;
-    private int id = 0;
-    private int instrucciones;
+    String nombre;
+    int id = 0;
+    int instrucciones;
     private int espacio;
     
-    Memoria memoria = new Memoria();
+    Memoria memoria = Memoria.getInstance();
     
-    public void crearProceso(String nombre){
+    public void crearProceso(String nombre, int id){
         if(memoria.getLocalidades() > this.espacio){
             this.nombre = nombre;
-            id += 1;
             this.id = id;
             this.instrucciones = (int)(Math.random()*(30-10)) + 10;
             this.espacio = 500;
-            memoria.colaProcesos.add(this);
             memoria.setLocalidades(memoria.getLocalidades() - this.espacio);
         }else{
             System.out.println("No se puede crear otro proceso.");
@@ -32,14 +30,25 @@ public class Proceso {
     }
     
     public void estadoActual(){
-        System.out.println("El número de procesos en ela cola es " + 
-                memoria.colaProcesos.);
+        System.out.println("El número de procesos en la cola es " + 
+                memoria.colaProcesos.size());
+        System.out.println("Los procesos finalizados exitosamente son ");
+        System.out.println("Los procesos eliminados son ");
+        // falta poner el estado de la memoria
+        // localidades ocupadas por procesos
     }
     
     public void mostrarProcesos(){
-        System.out.println(memoria.colaProcesos.getFirst().nombre);
+        /*System.out.println(memoria.colaProcesos.getFirst().nombre);
         System.out.println("Las localidades restantes son " + memoria.getLocalidades());
-        System.out.println("Las instrucciones restantes son " + memoria.colaProcesos.getFirst().instrucciones);
+        System.out.println("Las instrucciones restantes son " + memoria.colaProcesos.getFirst().instrucciones);*/
+        
+        for(int i = 0; i < memoria.colaProcesos.size(); i++){
+            System.out.println("ID " + memoria.colaProcesos.get(i).id);
+            System.out.println("Nombre " + memoria.colaProcesos.get(i).nombre);
+            System.out.println("Intrucciones " + memoria.colaProcesos.get(i).instrucciones);
+        }
+        
     }
     
     
