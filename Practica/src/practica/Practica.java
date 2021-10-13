@@ -60,6 +60,7 @@ public class Practica {
                         break;
                     case 5:
                         System.out.println("Has seleccionado la opcion 5");
+                        ejecutarProceso();
                         break;
                     case 6:
                         System.out.println("Has seleccionado la opcion 6");
@@ -79,7 +80,17 @@ public class Practica {
                 System.out.println("Debes insertar un número");
                 sn.next();
             }
+            teclaParaContinuar(); // Para no desplegar el menu inmediatamente
         }
+    }
+    
+    private static void teclaParaContinuar(){ //func para dar intervalo entre menus
+        System.out.println("Presiona ENTER para continuar...");
+        try{
+            System.in.read();
+            
+        }
+        catch(Exception e){}
     }
     
     private static void crearProceso(){
@@ -123,6 +134,17 @@ public class Practica {
     }
     
     private static void ejecutarProceso(){
+        System.out.println("Proceso: " + memoria.colaProcesos.getFirst().nombre);
+        memoria.colaProcesos.getFirst().instrucciones = memoria.colaProcesos.getFirst().instrucciones - 5;
+        if (memoria.colaProcesos.getFirst().instrucciones <= 0){            // Si ya no tiene instrucciones
+            memoria.finalizados.addFirst(memoria.colaProcesos.getFirst());  // Agrega el elemento a lista finalizados
+            System.out.println("PROCESO: " + memoria.colaProcesos.getFirst().nombre + " FINALIZADO");
+            System.out.println("LIBERADAS: " + memoria.colaProcesos.getFirst().espacio + " LOCALIDADES");
+            memoria.colaProcesos.remove();                                  // Quita el primer elemento   
+        }else{
+            memoria.colaProcesos.add(memoria.colaProcesos.getFirst());      // Copia el 1st al final de la LinkedList
+            memoria.colaProcesos.removeFirst();                             // Saca el primer elemento de la LinkedList
+        }
     
     }
     
