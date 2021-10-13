@@ -20,6 +20,7 @@ public class Practica {
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion; //Guardaremos la opcion del usuario
+        Proceso proceso = new Proceso();
  
         while (!salir) {
  
@@ -40,12 +41,14 @@ public class Practica {
                 switch (opcion) {
                     case 1:
                         System.out.println("Has seleccionado la opcion 1");
+                        proceso.crearProceso("Uno");
                         break;
                     case 2:
                         System.out.println("Has seleccionado la opcion 2");
                         break;
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
+                        proceso.mostrarProcesos();
                         break;
                     case 4:
                         System.out.println("Has seleccionado la opcion 4");
