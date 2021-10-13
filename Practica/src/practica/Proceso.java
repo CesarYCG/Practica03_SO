@@ -19,17 +19,27 @@ public class Proceso {
     public void crearProceso(String nombre, int id){
         if(memoria.getLocalidades() > this.espacio){
             this.nombre = nombre;
+
             this.id = id;
             this.instrucciones = (int)(Math.random()*(30-10)) + 10;
             this.espacio = 500;
+
+            id += 1;
+            //this.id = id;
+            this.instrucciones = (int)(Math.random()*(30-10)) + 10;
+            this.espacio = 500;
+            //memoria.colaProcesos.add(this);
+
             memoria.setLocalidades(memoria.getLocalidades() - this.espacio);
+            
         }else{
-            System.out.println("No se puede crear otro proceso.");
+            System.out.println("ERROR: MEMORIA INSUFICIENTE.");
             System.out.println("Es necesario ejecutar o matar otros proyectos.");
         }
     }
     
     public void estadoActual(){
+
         System.out.println("El número de procesos en la cola es " + 
                 memoria.colaProcesos.size());
         System.out.println("Los procesos finalizados exitosamente son ");
@@ -43,15 +53,13 @@ public class Proceso {
         System.out.println("Las localidades restantes son " + memoria.getLocalidades());
         System.out.println("Las instrucciones restantes son " + memoria.colaProcesos.getFirst().instrucciones);*/
         
-        for(int i = 0; i < memoria.colaProcesos.size(); i++){
-            System.out.println("ID " + memoria.colaProcesos.get(i).id);
-            System.out.println("Nombre " + memoria.colaProcesos.get(i).nombre);
-            System.out.println("Intrucciones " + memoria.colaProcesos.get(i).instrucciones);
+        System.out.println("PID     NOMBRE               INSTRUCCIONES     ");
+        for (int i = 0; i < memoria.colaProcesos.size(); i++) {
+            System.out.println(memoria.colaProcesos.get(i).id + "       "
+                    + memoria.colaProcesos.get(i).nombre + "              "
+                    + memoria.colaProcesos.get(i).instrucciones);
         }
-        
-    }
-    
-    
-    
-    
+        System.out.println("El número total de procesos en ela cola es " + 
+                memoria.colaProcesos.size());
+    }    
 }

@@ -52,11 +52,14 @@ public class Practica {
                         break;
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
-                        for(int i = 0; i < memoria.colaProcesos.size(); i++){
-                            System.out.println("ID " + memoria.colaProcesos.get(i).id);
-                            System.out.println("Nombre " + memoria.colaProcesos.get(i).nombre);
-                            System.out.println("Intrucciones " + memoria.colaProcesos.get(i).instrucciones);
+                        System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
+                        for (int i = 0; i < memoria.colaProcesos.size(); i++) {
+                            System.out.println(memoria.colaProcesos.get(i).id + "\t"
+                                    + memoria.colaProcesos.get(i).nombre + "\t\t"
+                                    + memoria.colaProcesos.get(i).instrucciones);
                         }
+                        System.out.println("PROCESOS TOTALES: "
+                                + memoria.colaProcesos.size());
                         break;
                     case 4:
                         System.out.println("Has seleccionado la opcion 4");
