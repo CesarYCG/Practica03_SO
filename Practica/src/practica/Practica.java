@@ -52,18 +52,7 @@ public class Practica {
                         break;
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
-<<<<<<< HEAD
                         mostrarProcesos();
-=======
-                        System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
-                        for (int i = 0; i < memoria.colaProcesos.size(); i++) {
-                            System.out.println(memoria.colaProcesos.get(i).id + "\t"
-                                    + memoria.colaProcesos.get(i).nombre + "\t\t"
-                                    + memoria.colaProcesos.get(i).instrucciones);
-                        }
-                        System.out.println("PROCESOS TOTALES: "
-                                + memoria.colaProcesos.size());
->>>>>>> eba65e5d202497e20cb3d1818d7de4bc6f3ef57f
                         break;
                     case 4:
                         System.out.println("Has seleccionado la opcion 4");
