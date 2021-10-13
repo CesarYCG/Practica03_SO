@@ -12,16 +12,18 @@ import java.util.Scanner;
  * @author fernando
  */
 public class Practica {
-
+    static Proceso proceso = new Proceso();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        menu();
+    }
+    
+    private static void menu(){
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
         int opcion; //Guardaremos la opcion del usuario
-        Proceso proceso = new Proceso();
- 
         while (!salir) {
  
             System.out.println("1. Crear Proceso nuevo");
@@ -40,8 +42,7 @@ public class Practica {
  
                 switch (opcion) {
                     case 1:
-                        System.out.println("Has seleccionado la opcion 1");
-                        proceso.crearProceso("Uno");
+                        crearProceso();
                         break;
                     case 2:
                         System.out.println("Has seleccionado la opcion 2");
@@ -64,6 +65,7 @@ public class Practica {
                         break;
                     case 8:
                         salir = true;
+                        sn.close();
                         break;
                     default:
                         System.out.println("Solo números entre 1 y 4");
@@ -73,6 +75,16 @@ public class Practica {
                 sn.next();
             }
         }
+    }
+    
+    private static void crearProceso(){
+        Scanner sn = new Scanner(System.in);
+        String nombre; // Guardamos nombre del proceso
+        
+        System.out.println("Has seleccionado la opcion 1");
+        System.out.println("Escribe el nombre del proceso");
+        nombre = sn.nextLine();
+        proceso.crearProceso(nombre);
     }
     
 }

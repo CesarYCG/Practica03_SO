@@ -10,24 +10,39 @@ package practica;
  */
 public class Proceso {
     private String nombre;
-    private int id;
+    private int id = 0;
     private int instrucciones;
     private int espacio;
     
     Memoria memoria = new Memoria();
     
     public void crearProceso(String nombre){
-        System.out.println("Las localidades restantes son " + memoria.localidades);
-        this.nombre = nombre;
-        this.espacio = 64;
-        memoria.colaProcesos.add(this);
-        memoria.localidades = memoria.localidades - this.espacio;
+        if(memoria.getLocalidades() > this.espacio){
+            this.nombre = nombre;
+            id += 1;
+            this.id = id;
+            this.instrucciones = (int)(Math.random()*(30-10)) + 10;
+            this.espacio = 500;
+            memoria.colaProcesos.add(this);
+            memoria.setLocalidades(memoria.getLocalidades() - this.espacio);
+        }else{
+            System.out.println("No se puede crear otro proceso.");
+            System.out.println("Es necesario ejecutar o matar otros proyectos.");
+        }
+    }
+    
+    public void estadoActual(){
+        System.out.println("El número de procesos en ela cola es " + 
+                memoria.colaProcesos.);
     }
     
     public void mostrarProcesos(){
         System.out.println(memoria.colaProcesos.getFirst().nombre);
-        System.out.println("Las localidades restantes son " + memoria.localidades);
+        System.out.println("Las localidades restantes son " + memoria.getLocalidades());
+        System.out.println("Las instrucciones restantes son " + memoria.colaProcesos.getFirst().instrucciones);
     }
+    
+    
     
     
 }

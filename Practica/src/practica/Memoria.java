@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * @author fernando
  */
 public class Memoria {
-    public int localidades = 2048;
+    private int localidades = 2048;
     LinkedList<Proceso> colaProcesos = new LinkedList<Proceso>();
     LinkedList<Proceso> finalizados = new LinkedList<Proceso>();
     LinkedList<Proceso> eliminados = new LinkedList<Proceso>();
