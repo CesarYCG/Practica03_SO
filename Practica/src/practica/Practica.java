@@ -48,18 +48,15 @@ public class Practica {
                         break;
                     case 2:
                         System.out.println("Has seleccionado la opcion 2");
-                        
+                        estadoActual();
                         break;
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
-                        for(int i = 0; i < memoria.colaProcesos.size(); i++){
-                            System.out.println("ID " + memoria.colaProcesos.get(i).id);
-                            System.out.println("Nombre " + memoria.colaProcesos.get(i).nombre);
-                            System.out.println("Intrucciones " + memoria.colaProcesos.get(i).instrucciones);
-                        }
+                        mostrarProcesos();
                         break;
                     case 4:
                         System.out.println("Has seleccionado la opcion 4");
+                        procesoActual();
                         break;
                     case 5:
                         System.out.println("Has seleccionado la opcion 5");
@@ -94,6 +91,38 @@ public class Practica {
         nombre = sn.nextLine();
         proceso.crearProceso(nombre, id);
         memoria.colaProcesos.add(proceso);
+    }
+    
+    private static void estadoActual(){
+        System.out.println("El número de procesos en la cola es " + 
+                memoria.colaProcesos.size());
+        System.out.println("Los procesos finalizados exitosamente son ");
+        System.out.println("Los procesos eliminados son ");
+        // falta poner el estado de la memoria
+        // localidades ocupadas por procesos
+    }  
+    
+    private static void mostrarProcesos(){
+        System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
+        for (int i = 0; i < memoria.colaProcesos.size(); i++) {
+            System.out.println(memoria.colaProcesos.get(i).id + "\t"
+                               + memoria.colaProcesos.get(i).nombre + "\t\t"
+                               + memoria.colaProcesos.get(i).instrucciones);
+        }
+        System.out.println("PROCESOS TOTALES: "
+                 + memoria.colaProcesos.size());
+    }
+    
+    private static void procesoActual(){
+        System.out.println("Nombre " + memoria.colaProcesos.getFirst().nombre);
+        System.out.println("ID " + memoria.colaProcesos.getFirst().id);
+        System.out.println("Intrucciones totales " + memoria.colaProcesos.getFirst().instrucciones);
+        //Falta instrucciones ejecutadas
+        System.out.println("Direcciones de memoria " + memoria.colaProcesos.getFirst().espacio);
+    }
+    
+    private static void ejecutarProceso(){
+    
     }
     
 }
