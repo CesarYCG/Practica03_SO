@@ -108,7 +108,7 @@ public class Practica {
             memoria.colaProcesos.add(proceso);
         }else{
             System.out.println("ERROR: MEMORIA INSUFICIENTE.");
-            System.out.println("Es necesario ejecutar o matar otros proyectos.");
+            System.out.println("Es necesario ejecutar o matar otros procesos.");
         }
         
     }
@@ -163,7 +163,7 @@ public class Practica {
                 aux = memoria.colaProcesos.get(i).espacio;
                 
                 System.out.println("[" + (sum+1) + "-" + 
-                        (sum + memoria.colaProcesos.get(i).espacio)+ "]\t" +
+                        (sum + memoria.colaProcesos.get(i).espacio)+ "]  \t" +
                         memoria.colaProcesos.get(i).nombre);
                                       
                 sum += aux;
@@ -179,7 +179,7 @@ public class Practica {
             System.out.println("PID     NOMBRE          INSTRUCCIONES     ");
             for (int i = 0; i < memoria.colaProcesos.size(); i++) {
                 System.out.println(memoria.colaProcesos.get(i).id + "\t"
-                        + memoria.colaProcesos.get(i).nombre + "\t\t"
+                        + memoria.colaProcesos.get(i).nombre + "  \t\t"
                         + memoria.colaProcesos.get(i).instrucciones);
             }
             System.out.println("PROCESOS TOTALES: "
@@ -213,6 +213,7 @@ public class Practica {
                 memoria.finalizados.addFirst(memoria.colaProcesos.getFirst());  // Agrega el elemento a lista finalizados
                 System.out.println("PROCESO: " + memoria.colaProcesos.getFirst().nombre + " FINALIZADO");
                 System.out.println("LIBERADAS: " + memoria.colaProcesos.getFirst().espacio + " LOCALIDADES");
+                memoria.setLocalidades(memoria.getLocalidades() + memoria.colaProcesos.getFirst().espacio); // Reintegramos el espacio
                 memoria.colaProcesos.remove();                                  // Quita el primer elemento   
             } else {
                 memoria.colaProcesos.add(memoria.colaProcesos.getFirst());      // Copia el 1st al final de la LinkedList
@@ -227,6 +228,7 @@ public class Practica {
         }else{
             memoria.colaProcesos.add(memoria.colaProcesos.getFirst());
             memoria.colaProcesos.removeFirst();
+            System.out.println("SIGUIENTE: " + memoria.colaProcesos.getFirst().nombre);
         }
     }
     
@@ -236,7 +238,8 @@ public class Practica {
         }else{
             memoria.setLocalidades(memoria.getLocalidades() + memoria.colaProcesos.getFirst().espacio);
             memoria.eliminados.add(memoria.colaProcesos.getFirst());
-            System.out.println("La instrucciones pendientes son " + memoria.colaProcesos.getFirst().instrucciones);
+            System.out.println("PROCESO: " + memoria.colaProcesos.getFirst().nombre + " SERA ELIMINADO");
+            System.out.println("Las instrucciones pendientes son " + memoria.colaProcesos.getFirst().instrucciones);
             memoria.colaProcesos.remove();
         }
     }
