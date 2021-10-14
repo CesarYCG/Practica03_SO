@@ -99,7 +99,6 @@ public class Practica {
             Proceso proceso = new Proceso();
             Scanner sn = new Scanner(System.in);
             String nombre; // Guardamos nombre del proceso
-            System.out.println("Has seleccionado la opcion 1");
             System.out.println("Escribe el nombre del proceso");
             nombre = sn.nextLine();
             proceso.crearProceso(nombre, id,espacio);
