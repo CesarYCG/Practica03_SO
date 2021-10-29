@@ -4,6 +4,7 @@
  */
 package practica;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -13,13 +14,15 @@ import java.util.LinkedList;
 public class Memoria {
     
     private static Memoria memoria;
-    private int localidades = 2048;
+    //2048
+    private int localidades = 1024;
     LinkedList<Proceso> colaProcesos = new LinkedList<Proceso>();
     LinkedList<Proceso> finalizados = new LinkedList<Proceso>();
     LinkedList<Proceso> eliminados = new LinkedList<Proceso>();
+    CustomLinkedList listaMemoria = new CustomLinkedList();
     
     private Memoria(){
-    
+        inciaMemoria();
     }
     
     public static Memoria getInstance(){
@@ -44,6 +47,15 @@ public class Memoria {
      */
     public void setLocalidades(int localidades) {
         this.localidades = localidades;
+    }
+    
+    private void inciaMemoria(){
+        int posicionActual = 0;
+        int localidadesPagina = 16;
+        for(int i = 1; i < 65; i++){
+            listaMemoria.insert("Hueco", posicionActual, localidadesPagina,i);
+            posicionActual += localidadesPagina;
+        }
     }
     
 }

@@ -14,6 +14,7 @@ public class Proceso {
     private int instrucciones;
     private int espacio;
     private int instruccionesEjecutadas;
+    private int paginas;
     
     private Memoria memoria = Memoria.getInstance();
     
@@ -108,5 +109,19 @@ public class Proceso {
      */
     public void setMemoria(Memoria memoria) {
         this.memoria = memoria;
+    }
+
+    /**
+     * @return the paginas
+     */
+    public int getPaginas() {
+        return paginas;
+    }
+
+    /**
+     * @param paginas the paginas to set
+     */
+    public void setPaginas(int paginas) {
+        this.paginas = paginas;
     }
 }

@@ -6,6 +6,7 @@ package practica;
 
 import java.util.InputMismatchException;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,8 @@ import java.util.Scanner;
 public class Practica {  
     static Memoria memoria = Memoria.getInstance();
     static int id = 1;
+    static int posicionActual = 0;
+    static int index = 0;
     static int[] arrLocalidades = new int[]{64,128,256,512};
     
     /**
@@ -38,6 +41,7 @@ public class Practica {
             System.out.println("6. Pasar al proceso siguiente");
             System.out.println("7. Matar proceso actual");
             System.out.println("8. Salir del programa");
+            System.out.println("9. Array de memoria");
  
             try {
  
@@ -72,6 +76,11 @@ public class Practica {
                         System.out.println("Fin del Programa...");
                         sn.close();
                         break;
+                    case 9:
+                        memoria.listaMemoria.show();
+                        System.out.println(memoria.listaMemoria.size());
+                        System.out.println(memoria.listaMemoria.get(0).getNombre());
+                        
                     default:
                         System.out.println("Solo números entre 1 y 8");
                 }
@@ -87,14 +96,14 @@ public class Practica {
         System.out.println("Presiona ENTER para continuar...");
         try{
             System.in.read();
-            
         }
         catch(IOException e){}
     }
     
     private static void crearProceso(){
         int random = (int)(Math.random()*4);
-        int espacio = arrLocalidades[random];        
+        int espacio = arrLocalidades[random];
+        int localidades = 16;
         if (memoria.getLocalidades() >= espacio){
             Proceso proceso = new Proceso();
             Scanner sn = new Scanner(System.in);
@@ -102,8 +111,31 @@ public class Practica {
             System.out.println("Escribe el nombre del proceso");
             nombre = sn.nextLine();
             proceso.crearProceso(nombre, id,espacio);
+            
+            proceso.setPaginas(espacio / 16);
+            
             id += 1;
             memoria.colaProcesos.add(proceso);
+            
+            
+            for(int i = 0; i < proceso.getPaginas();i++){
+                
+                //eliminarProceso(index);
+                //insertarProceso(index,nombre,posicionActual,localidades,index);
+                //posicionActual += localidades;
+                //index += 1;
+                
+                memoria.listaMemoria.get(index).setNombre(nombre);
+                //for(int j = 0; j < memoria.listaMemoria.size();i++){
+                //    if(memoria.listaMemoria.get(j).getNombre().contains("Hueco")){
+                //        memoria.listaMemoria.get(j).setNombre(nombre);
+                //        break;
+                //    }       
+                //}
+                index = getIndex();
+                
+            }
+            
         }else{
             System.out.println("ERROR: MEMORIA INSUFICIENTE.");
             System.out.println("Es necesario ejecutar o matar otros procesos.");
@@ -151,6 +183,7 @@ public class Practica {
             System.out.println("LISTA DE PROCESOS ELIMINADOS VACIA");
         }
         
+        /*
         if (memoria.colaProcesos.isEmpty()) {    // LISTA DE LOCALIDADES DE MEM
             System.out.println("NO HAY PROCESOS EN MEMORIA.");
         } else {
@@ -167,6 +200,8 @@ public class Practica {
                 sum += aux;
             }
         }
+        */
+        
         // Total de localidades faltantes
         System.out.println("ESPACIO DE MEMORIA DISPONIBLE: " + 
                 memoria.getLocalidades() + " LOCALIDADES");
@@ -238,7 +273,37 @@ public class Practica {
             memoria.eliminados.add(memoria.colaProcesos.getFirst());
             System.out.println("PROCESO: " + memoria.colaProcesos.getFirst().getNombre() + " SERA ELIMINADO");
             System.out.println("Las instrucciones pendientes son " + memoria.colaProcesos.getFirst().getInstrucciones());
+            liberarMemoria(memoria.colaProcesos.getFirst().getNombre());
             memoria.colaProcesos.remove();
         }
     }
+    
+    private static void liberarMemoria(String nombre){
+        //Collections.replaceAll(memoria.listaMemoria, nombre, "Vacio");
+        for(int i = 0; i < memoria.listaMemoria.size(); i++){
+            if(memoria.listaMemoria.get(i).getNombre().contains(nombre)){
+                memoria.listaMemoria.get(i).setNombre("Hueco");
+            }
+        }
+    }
+
+    private static void insertarProceso(int indice,String nombre, int empieza, int longitud, int index){
+        memoria.listaMemoria.insertAt(indice,nombre,empieza,longitud, index);
+    }
+    
+    private static void eliminarProceso(int indice){
+        memoria.listaMemoria.deleteAt(indice);
+    }
+    
+    private static int getIndex(){
+        for(int i = 0; i < memoria.listaMemoria.size();i++){
+            if(memoria.listaMemoria.get(i).getNombre().contains("Hueco")){
+                index = memoria.listaMemoria.get(i).getIndice();
+                break;
+            }
+        }
+        return index;
+    }
+
 }
+
