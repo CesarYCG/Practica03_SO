@@ -4,6 +4,8 @@
  */
 package practica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author fernando & cesar
@@ -15,6 +17,7 @@ public class Proceso {
     private int espacio;
     private int instruccionesEjecutadas;
     private int paginas;
+    ArrayList<Integer> tablaPaginas = new ArrayList<Integer>();
     
     private Memoria memoria = Memoria.getInstance();
     
@@ -25,6 +28,10 @@ public class Proceso {
         this.setInstrucciones((int)(Math.random()*(30-10)) + 10);
         this.setInstruccionesEjecutadas(0);
         getMemoria().setLocalidades(getMemoria().getLocalidades() - this.getEspacio());
+    }
+    
+    public void insertarTabla(int indice){
+        tablaPaginas.add(indice);
     }
 
     /**

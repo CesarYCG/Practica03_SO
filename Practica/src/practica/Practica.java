@@ -17,7 +17,7 @@ public class Practica {
     static Memoria memoria = Memoria.getInstance();
     static int id = 1;
     static int posicionActual = 0;
-    static int index = 0;
+    static int index = getIndex();
     static int[] arrLocalidades = new int[]{64,128,256,512};
     
     /**
@@ -25,6 +25,7 @@ public class Practica {
      */
     public static void main(String[] args) {
         menu();
+        
     }
     
     private static void menu(){
@@ -80,6 +81,7 @@ public class Practica {
                         memoria.listaMemoria.show();
                         System.out.println(memoria.listaMemoria.size());
                         System.out.println(memoria.listaMemoria.get(0).getNombre());
+                        System.out.println(getIndex());
                         
                     default:
                         System.out.println("Solo números entre 1 y 8");
@@ -132,7 +134,9 @@ public class Practica {
                 //        break;
                 //    }       
                 //}
+                proceso.insertarTabla(index);
                 index = getIndex();
+                
                 
             }
             
@@ -232,6 +236,10 @@ public class Practica {
             System.out.println("Intrucciones totales " + memoria.colaProcesos.getFirst().getInstrucciones());
             System.out.println("Instrucciones ejecutadas " + memoria.colaProcesos.getFirst().getInstruccionesEjecutadas());
             System.out.println("Direcciones de memoria " + memoria.colaProcesos.getFirst().getEspacio());
+            System.out.print("Tabla de paginas ");
+            for(int i=0; i < memoria.colaProcesos.getFirst().tablaPaginas.size();i++){
+                System.out.println(memoria.colaProcesos.getFirst().tablaPaginas.get(i));
+            }
         }
     }
     
@@ -280,7 +288,7 @@ public class Practica {
     
     private static void liberarMemoria(String nombre){
         //Collections.replaceAll(memoria.listaMemoria, nombre, "Vacio");
-        for(int i = 0; i < memoria.listaMemoria.size(); i++){
+        for(int i = 1; i <= memoria.listaMemoria.size(); i++){
             if(memoria.listaMemoria.get(i).getNombre().contains(nombre)){
                 memoria.listaMemoria.get(i).setNombre("Hueco");
             }
@@ -296,7 +304,7 @@ public class Practica {
     }
     
     private static int getIndex(){
-        for(int i = 0; i < memoria.listaMemoria.size();i++){
+        for(int i = 1; i <= memoria.listaMemoria.size();i++){
             if(memoria.listaMemoria.get(i).getNombre().contains("Hueco")){
                 index = memoria.listaMemoria.get(i).getIndice();
                 break;
