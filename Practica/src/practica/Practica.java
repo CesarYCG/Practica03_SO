@@ -18,6 +18,7 @@ public class Practica {
     static int id = 1;
     static int posicionActual = 0;
     static int index = getIndex();
+    static int ultimoProceso = getUltimoProceso();
     static int[] arrLocalidades = new int[]{64,128,256,512};
     
     /**
@@ -43,7 +44,8 @@ public class Practica {
             System.out.println("7. Matar proceso actual");
             System.out.println("8. Salir del programa");
             System.out.println("9. Array de memoria");
- 
+            System.out.println("10. Desfragmentacion");
+            
             try {
  
                 System.out.println("Ingresa el numero de la opcion requerida"
@@ -82,6 +84,11 @@ public class Practica {
                         System.out.println(memoria.listaMemoria.size());
                         System.out.println(memoria.listaMemoria.get(0).getNombre());
                         System.out.println(getIndex());
+                        System.out.println(getUltimoProceso());
+                        break;
+                    case 10:
+                        desfragmentacion();
+                        break;
                         
                     default:
                         System.out.println("Solo números entre 1 y 8");
@@ -312,6 +319,33 @@ public class Practica {
         }
         return index;
     }
-
+    
+    private static int getUltimoProceso(){
+        for(int i = getIndex();i <= memoria.listaMemoria.size();i++){
+            if(!memoria.listaMemoria.get(i).getNombre().contains("Hueco")){
+                ultimoProceso = memoria.listaMemoria.get(i).getIndice();
+                break;
+            }
+            ultimoProceso = -1;
+        }
+        return ultimoProceso;
+    }
+    
+    private static void desfragmentacion(){
+        int diff = getUltimoProceso() - getIndex();
+        System.out.println(diff);
+        if(getUltimoProceso() == -1){
+            System.out.println("No se puede hacer las desfragmentación");
+        }else{
+            while(getUltimoProceso() != -1 ){
+                intercambio(getIndex(), getUltimoProceso());
+            }
+        }
+    }
+    
+    private static void intercambio(int hueco, int proceso){
+        memoria.listaMemoria.get(hueco).setNombre(memoria.listaMemoria.get(proceso).getNombre());
+        memoria.listaMemoria.get(proceso).setNombre("Hueco");
+    } 
 }
 
