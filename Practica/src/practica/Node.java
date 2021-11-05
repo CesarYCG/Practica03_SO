@@ -9,15 +9,13 @@ package practica;
  * @author fernando
  */
 public class Node {
-
-
     private String nombre; //Data in the current node
     private int empieza;
     private int longitud;
     private int indice;
     Node next; //Reference for the next node
 
-    //Constructor which takes an int value which is stored as the data in this Node object.
+    //Constructor which contains nombre, start val, length and index of process
     Node(String nombre, int empieza, int longitud, int indice) {
         this.nombre = nombre;
         this.empieza = empieza;

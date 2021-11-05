@@ -78,10 +78,10 @@ public class CustomLinkedList {
         }
         return i;
     }
-    
+    //function to show nodes in Linked List
     public Node get(int index){
         Node currentNode = head;
-        if(currentNode == null){
+        if(currentNode == null){ // No elements at LinkedList
             System.out.println("Linked list is empty");
             return null;
         }else{
@@ -100,8 +100,10 @@ public class CustomLinkedList {
         }
         else {
             while(currentNode != null) {
-                System.out.println("[" + (currentNode.getIndice()) + "]" + " " + currentNode.getNombre() + " " + currentNode.getEmpieza() + " " + 
-                        currentNode.getLongitud() + " ");
+                System.out.println("[" + (currentNode.getIndice()) + "]" + " " 
+                        + currentNode.getNombre() + " " 
+                        + currentNode.getEmpieza() + " " 
+                        + currentNode.getLongitud() + " ");
                 System.out.println("\t|");
                 System.out.println("\t|");
                 System.out.println("\t|");
@@ -109,7 +111,5 @@ public class CustomLinkedList {
                 currentNode = currentNode.next;
             }
         }
-    }
-    
-    
+    }        
 }
