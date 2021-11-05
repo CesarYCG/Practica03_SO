@@ -73,27 +73,30 @@ public class Practica {
                     case 7: // Matar proceso actual
                         matarProceso();
                         break;
-                    case 8: // Salir del programa
+                    case 8: // Desfragmenta los huecos de linked list
+                        desfragmentacion();
                         salir = true;
                         mostrarProcesos();
                         System.out.println("Fin del Programa...");
                         sn.close();
                         break;
-                    case 9:
-                        memoria.listaMemoria.show();
-                        System.out.println(memoria.listaMemoria.size());
-                        System.out.println(memoria.listaMemoria.get(0).getNombre());
-                        System.out.println(getIndex());
-                        System.out.println(getUltimoProceso());
+                    case 9:  // Muestra la LISTA LIGADA CUSTOM de memoria
+                        memoria.listaMemoria.show(); 
+                        //System.out.println(memoria.listaMemoria.size()); 
+                        //System.out.println(memoria.listaMemoria.get(0).getNombre());
+                        //System.out.println(getIndex());
+                        //System.out.println(getUltimoProceso());
                         break;
-                    case 10:
-                        desfragmentacion();
-                        break;
-                        
-                    default:
-                        System.out.println("Solo números entre 1 y 8");
+                    case 10:  // Salir del programa                        
+                        salir = true;
+                        mostrarProcesos();
+                        System.out.println("Fin del Programa...");
+                        sn.close();
+                        break;   
+                    default: // Si el usuario es gracioso
+                        System.out.println("Solo números entre 1 y 10");
                 }
-                teclaParaContinuar(); // Para no desplegar el menu inmediatamente
+                //teclaParaContinuar(); // Para no desplegar el menu inmediatamente
             } catch (InputMismatchException e) {
                 System.out.println("Debes insertar un número");
                 sn.next();
