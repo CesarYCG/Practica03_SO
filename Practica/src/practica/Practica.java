@@ -6,7 +6,7 @@ package practica;
 
 import java.util.InputMismatchException;
 import java.io.IOException;
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -120,12 +120,10 @@ public class Practica {
             System.out.println("Escribe el nombre del proceso");
             nombre = sn.nextLine();
             proceso.crearProceso(nombre, id,espacio);
-            
-            proceso.setPaginas(espacio / 16);
-            
+            proceso.setPaginas(espacio / localidades);
+        
             id += 1;
             memoria.colaProcesos.add(proceso);
-            
             
             for(int i = 0; i < proceso.getPaginas();i++){
                 
@@ -333,9 +331,9 @@ public class Practica {
     
     private static void desfragmentacion(){
         int diff = getUltimoProceso() - getIndex();
-        System.out.println(diff);
-        if(getUltimoProceso() == -1){
-            System.out.println("No se puede hacer las desfragmentación");
+        //System.out.println(diff);     // Para saber el valor de la diferencia
+        if(getUltimoProceso() == -1){   // No hubo diferencia de desfragmentacion
+            System.out.println("NO SE DETECTARON PROCESOS PARA DESFRAGMENTAR");
         }else{
             while(getUltimoProceso() != -1 ){
                 intercambio(getIndex(), getUltimoProceso());

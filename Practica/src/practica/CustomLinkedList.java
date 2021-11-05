@@ -99,15 +99,16 @@ public class CustomLinkedList {
             System.out.println("Linked list is empty");
         }
         else {
+            System.out.println("Indice \t[Proceso|Inicio|Longitud]");
             while(currentNode != null) {
                 System.out.println("[" + (currentNode.getIndice()) + "]" + " " 
-                        + currentNode.getNombre() + " " 
-                        + currentNode.getEmpieza() + " " 
-                        + currentNode.getLongitud() + " ");
-                System.out.println("\t|");
-                System.out.println("\t|");
-                System.out.println("\t|");
-                System.out.println("\tV");
+                        + "\t[" + currentNode.getNombre()  
+                        + "\t|" + currentNode.getEmpieza() 
+                        + "\t|" + currentNode.getLongitud() + "] ");
+                //ystem.out.println("\t|");
+                //System.out.println("\t|");
+                //System.out.println("\t|");
+                //System.out.println("\tV");
                 currentNode = currentNode.next;
             }
         }
