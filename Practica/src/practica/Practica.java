@@ -43,7 +43,7 @@ public class Practica {
             System.out.println("6.  Pasar al proceso siguiente");
             System.out.println("7.  Matar proceso actual");
             System.out.println("8.  Desfragmentacion");
-            System.out.println("9.  Array de memoria");
+            System.out.println("9.  Estado de los procesos (paginas)");
             System.out.println("10. Salir del programa");
             
             try {
@@ -55,7 +55,7 @@ public class Practica {
                     case 1: // Crear Proceso
                         crearProceso();
                         break;
-                    case 2: // Estado actual del sistema
+                    case 2: // Ver estado actual del sistema
                         estadoActual();
                         break;
                     case 3: // Imprimir cola de procesos
@@ -77,6 +77,7 @@ public class Practica {
                         desfragmentacion();
                         break;
                     case 9:  // Muestra la LISTA LIGADA CUSTOM de memoria
+                        // ESTE PUNTO ES EL ESTADO ACTUAL DE LOS PROCESOS
                         memoria.listaMemoria.show(); 
                         //System.out.println(memoria.listaMemoria.size()); 
                         //System.out.println(memoria.listaMemoria.get(0).getNombre());
@@ -232,6 +233,7 @@ public class Practica {
             System.out.println("\n-------TABLA DE PÁGINAS-------");
             System.out.println("Pagina\t|Frame\t|PID\t|Contenido");
             int i;
+            
             for(i=0; i < memoria.colaProcesos.getFirst().tablaPaginas.size();i++){
                 System.out.println( i+1 // Contador de paginas
                 + "\t " +memoria.colaProcesos.getFirst().tablaPaginas.get(i) // Frame
@@ -239,6 +241,8 @@ public class Practica {
                 + "\t " + memoria.colaProcesos.getFirst().getNombre() // Contenido
                 + "/"   + "Pagina" + (i+1));  
             }
+
+            
             System.out.println("PAGINAS TOTALES: " + i);
         }
     }
@@ -294,14 +298,6 @@ public class Practica {
                 memoria.listaMemoria.get(i).setNombre("Hueco");
             }
         }
-    }
-
-    private static void insertarProceso(int indice,String nombre, int empieza, int longitud, int index){
-        memoria.listaMemoria.insertAt(indice,nombre,empieza,longitud, index);
-    }
-    
-    private static void eliminarProceso(int indice){
-        memoria.listaMemoria.deleteAt(indice);
     }
     
     private static int getIndex(){
