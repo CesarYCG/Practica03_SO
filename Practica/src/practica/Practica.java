@@ -178,25 +178,7 @@ public class Practica {
             System.out.println("LISTA DE PROCESOS ELIMINADOS VACIA");
         }
         
-        /*
-        if (memoria.colaProcesos.isEmpty()) {    // LISTA DE LOCALIDADES DE MEM
-            System.out.println("NO HAY PROCESOS EN MEMORIA.");
-        } else {
-            int aux;
-            int sum = 0;
-            System.out.println("LOCALIDAD \t PROCESO");
-            for (int i = 0; i < memoria.colaProcesos.size(); i++){
-                aux = memoria.colaProcesos.get(i).getEspacio();
-                
-                System.out.println("[" + (sum+1) + "-" + 
-                        (sum + memoria.colaProcesos.get(i).getEspacio())+ "]  \t" +
-                        memoria.colaProcesos.get(i).getNombre());
-                                      
-                sum += aux;
-            }
-        }
-        */
-        
+       
         // Total de localidades faltantes
         System.out.println("ESPACIO DE MEMORIA DISPONIBLE: " + 
                 memoria.getLocalidades() + " LOCALIDADES");
