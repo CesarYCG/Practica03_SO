@@ -93,7 +93,7 @@ public class Practica {
                     default: // Si el usuario es gracioso
                         System.out.println("Solo números entre 1 y 10");
                 }
-                //teclaParaContinuar(); // Para no desplegar el menu inmediatamente
+                teclaParaContinuar(); // Para no desplegar el menu inmediatamente
             } catch (InputMismatchException e) {
                 System.out.println("Debes insertar un número");
                 sn.next();
