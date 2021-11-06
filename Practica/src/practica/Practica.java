@@ -35,16 +35,16 @@ public class Practica {
         int opcion; //Guardaremos la opcion del usuario
         while (!salir) {
  
-            System.out.println("1. Crear Proceso nuevo");
-            System.out.println("2. Ver estado actual del sistema");
-            System.out.println("3. Imprimir cola de procesos");
-            System.out.println("4. Ver proceso actual");
-            System.out.println("5. Ejecutar proceso actual");
-            System.out.println("6. Pasar al proceso siguiente");
-            System.out.println("7. Matar proceso actual");
-            System.out.println("8. Salir del programa");
-            System.out.println("9. Array de memoria");
-            System.out.println("10. Desfragmentacion");
+            System.out.println("\n1.  Crear Proceso nuevo");
+            System.out.println("2.  Ver estado actual del sistema");
+            System.out.println("3.  Imprimir cola de procesos");
+            System.out.println("4.  Ver proceso actual");
+            System.out.println("5.  Ejecutar proceso actual");
+            System.out.println("6.  Pasar al proceso siguiente");
+            System.out.println("7.  Matar proceso actual");
+            System.out.println("8.  Desfragmentacion");
+            System.out.println("9.  Array de memoria");
+            System.out.println("10. Salir del programa");
             
             try {
  
@@ -119,33 +119,19 @@ public class Practica {
             System.out.println("Escribe el nombre del proceso");
             nombre = sn.nextLine();
             proceso.crearProceso(nombre, id,espacio);
-            proceso.setPaginas(espacio / localidades);
-        
+            proceso.setPaginas(espacio / localidades);       
             id += 1;
             memoria.colaProcesos.add(proceso);
             
-            for(int i = 0; i < proceso.getPaginas();i++){
-                
-                //eliminarProceso(index);
-                //insertarProceso(index,nombre,posicionActual,localidades,index);
-                //posicionActual += localidades;
-                //index += 1;
-                
+            for(int i = 0; i < proceso.getPaginas();i++){                     
                 memoria.listaMemoria.get(index).setNombre(nombre);
-                //for(int j = 0; j < memoria.listaMemoria.size();i++){
-                //    if(memoria.listaMemoria.get(j).getNombre().contains("Hueco")){
-                //        memoria.listaMemoria.get(j).setNombre(nombre);
-                //        break;
-                //    }       
-                //}
                 proceso.insertarTabla(index);
-                index = getIndex();
-                
-                
+                index = getIndex();         
             }
-            
+        // Si llega hasta acá es que si se creo el proceso
+        System.out.println("\nPROCESO: " + nombre + " CREADO EXITOSAMENTE");
         }else{
-            System.out.println("ERROR: MEMORIA INSUFICIENTE.");
+            System.out.println("\nERROR: MEMORIA INSUFICIENTE.");
             System.out.println("Es necesario ejecutar o matar otros procesos.");
         }
         
@@ -243,12 +229,6 @@ public class Practica {
                     + "\t\t\t " + memoria.colaProcesos.getFirst().getInstruccionesEjecutadas() // Instrucciones ejecutadas
                     + "\t\t\t\t " + memoria.colaProcesos.getFirst().getEspacio());     // DIR. de memoria ocupadas por proceso     
             
-            //Forma de Fer
-            //System.out.println("Nombre " + memoria.colaProcesos.getFirst().getNombre());
-            //System.out.println("ID " + memoria.colaProcesos.getFirst().getId());
-            //System.out.println("Intrucciones totales " + memoria.colaProcesos.getFirst().getInstrucciones());
-            //System.out.println("Instrucciones ejecutadas " + memoria.colaProcesos.getFirst().getInstruccionesEjecutadas());
-            //System.out.println("Direcciones de memoria " + memoria.colaProcesos.getFirst().getEspacio());
             System.out.println("\n-------TABLA DE PÁGINAS-------");
             System.out.println("Pagina\t|Frame\t|PID\t|Contenido");
             int i;
@@ -257,12 +237,7 @@ public class Practica {
                 + "\t " +memoria.colaProcesos.getFirst().tablaPaginas.get(i) // Frame
                 + "\t " + memoria.colaProcesos.getFirst().getId() // PID
                 + "\t " + memoria.colaProcesos.getFirst().getNombre() // Contenido
-                + "/"   + "Pagina" + (i+1));
-                //+ memoria.colaProcesos.getFirst().getInstruccionesEjecutadas() 
-                //+ memoria.colaProcesos.getFirst().getEspacio());
-                
-                //Forma de fernando
-                //System.out.println(memoria.colaProcesos.getFirst().tablaPaginas.get(i));    
+                + "/"   + "Pagina" + (i+1));  
             }
             System.out.println("PAGINAS TOTALES: " + i);
         }
@@ -272,13 +247,14 @@ public class Practica {
         if(memoria.colaProcesos.isEmpty()){
             System.out.println("COLA DE PROCESOS VACIA, REQUIERE AL MENOS UN (1) PROCESO CREADO.");
         }else{
-            System.out.println("Proceso: " + memoria.colaProcesos.getFirst().getNombre());
+            System.out.println("Proceso: " + memoria.colaProcesos.getFirst().getNombre() + " -5 INSTRUCCIONES");
             memoria.colaProcesos.getFirst().setInstrucciones(memoria.colaProcesos.getFirst().getInstrucciones() - 5);
             memoria.colaProcesos.getFirst().setInstruccionesEjecutadas(memoria.colaProcesos.getFirst().getInstruccionesEjecutadas() + 5);
             if (memoria.colaProcesos.getFirst().getInstrucciones() <= 0) {            // Si ya no tiene instrucciones
                 memoria.finalizados.addFirst(memoria.colaProcesos.getFirst());  // Agrega el elemento a lista finalizados
                 System.out.println("PROCESO: " + memoria.colaProcesos.getFirst().getNombre() + " FINALIZADO");
                 System.out.println("LIBERADAS: " + memoria.colaProcesos.getFirst().getEspacio() + " LOCALIDADES");
+                memoria.colaProcesos.getFirst().setInstrucciones(0); // Collocamos instrucciones en 0, evitando negativos
                 memoria.setLocalidades(memoria.getLocalidades() + memoria.colaProcesos.getFirst().getEspacio()); // Reintegramos el espacio
                 memoria.colaProcesos.remove();                                  // Quita el primer elemento   
             } else {

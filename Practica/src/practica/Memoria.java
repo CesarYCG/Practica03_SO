@@ -15,7 +15,7 @@ public class Memoria {
     
     private static Memoria memoria;
     //2048
-    private int localidades = 1024;
+    private int localidades = 1024; // PARA TEST 1024, PERO SON 2048 ORIGINALES
     LinkedList<Proceso> colaProcesos = new LinkedList<Proceso>();
     LinkedList<Proceso> finalizados = new LinkedList<Proceso>();
     LinkedList<Proceso> eliminados = new LinkedList<Proceso>();
