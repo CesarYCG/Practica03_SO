@@ -75,10 +75,6 @@ public class Practica {
                         break;
                     case 8: // Desfragmenta los huecos de linked list
                         desfragmentacion();
-                        salir = true;
-                        mostrarProcesos();
-                        System.out.println("Fin del Programa...");
-                        sn.close();
                         break;
                     case 9:  // Muestra la LISTA LIGADA CUSTOM de memoria
                         memoria.listaMemoria.show(); 
@@ -239,15 +235,36 @@ public class Practica {
         if(memoria.colaProcesos.isEmpty()){
             System.out.println("NO HAY PROCESOS EN COLA, CREE UNO PRIMERO.");
         }else{
-            System.out.println("Nombre " + memoria.colaProcesos.getFirst().getNombre());
-            System.out.println("ID " + memoria.colaProcesos.getFirst().getId());
-            System.out.println("Intrucciones totales " + memoria.colaProcesos.getFirst().getInstrucciones());
-            System.out.println("Instrucciones ejecutadas " + memoria.colaProcesos.getFirst().getInstruccionesEjecutadas());
-            System.out.println("Direcciones de memoria " + memoria.colaProcesos.getFirst().getEspacio());
-            System.out.print("Tabla de paginas ");
-            for(int i=0; i < memoria.colaProcesos.getFirst().tablaPaginas.size();i++){
-                System.out.println(memoria.colaProcesos.getFirst().tablaPaginas.get(i));
+            System.out.println("Nombre \t| PID \t| Instrucciones Totales | "
+                    + "Instrucciones Ejecutadas | DIR. De Memoria   ");
+            System.out.println(memoria.colaProcesos.getFirst().getNombre() // Nombre Proceso
+                    + "\t  " + memoria.colaProcesos.getFirst().getId()       // PID Proceso
+                    + "\t\t " + memoria.colaProcesos.getFirst().getInstrucciones() // Instrucciones totales
+                    + "\t\t\t " + memoria.colaProcesos.getFirst().getInstruccionesEjecutadas() // Instrucciones ejecutadas
+                    + "\t\t\t\t " + memoria.colaProcesos.getFirst().getEspacio());     // DIR. de memoria ocupadas por proceso     
+            
+            //Forma de Fer
+            //System.out.println("Nombre " + memoria.colaProcesos.getFirst().getNombre());
+            //System.out.println("ID " + memoria.colaProcesos.getFirst().getId());
+            //System.out.println("Intrucciones totales " + memoria.colaProcesos.getFirst().getInstrucciones());
+            //System.out.println("Instrucciones ejecutadas " + memoria.colaProcesos.getFirst().getInstruccionesEjecutadas());
+            //System.out.println("Direcciones de memoria " + memoria.colaProcesos.getFirst().getEspacio());
+            System.out.println("\n-------TABLA DE PÁGINAS-------");
+            System.out.println("Pagina\t|Frame\t|PID\t|Contenido");
+            int i;
+            for(i=0; i < memoria.colaProcesos.getFirst().tablaPaginas.size();i++){
+                System.out.println( i+1 // Contador de paginas
+                + "\t " +memoria.colaProcesos.getFirst().tablaPaginas.get(i) // Frame
+                + "\t " + memoria.colaProcesos.getFirst().getId() // PID
+                + "\t " + memoria.colaProcesos.getFirst().getNombre() // Contenido
+                + "/"   + "Pagina" + (i+1));
+                //+ memoria.colaProcesos.getFirst().getInstruccionesEjecutadas() 
+                //+ memoria.colaProcesos.getFirst().getEspacio());
+                
+                //Forma de fernando
+                //System.out.println(memoria.colaProcesos.getFirst().tablaPaginas.get(i));    
             }
+            System.out.println("PAGINAS TOTALES: " + i);
         }
     }
     
